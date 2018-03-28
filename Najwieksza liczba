@@ -1,50 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define mxz 101 //maksymalna dlugosc tablicy
+#define mxz 101 // Maksymalna dlugosc tablicy
 
-int przeliczenie(char [], int, int);
+int przeliczenie(char[], int, int);
 
-int main(){
- //zarezerwowanie miejsca w pamieci na zmienne i w razie koniecznosci przypisanie im wartosci 
- char x[mxz];
- int i, o, l, z, max;
- max = mxz-1; z=0; l=0;
+int main() {
+    // Zarezerwowanie miejsca w pamieci na zmienne i w razie koniecznosci przypisanie im wartosci
+    char x[mxz];
+    int i, o, l, z, max;
+    max = mxz - 1;
+    z = 0;
+    l = 0;
 
- //interakcja z uzytkownikiem 
- printf("Podaj liczby oddzielone od siebie spacja (ilosc wszystkich znakow nie moze przekraczac %d): ", max);
- fgets(x, max, stdin);
- 
- //ze tak powiem "program wlasciwy"
- do{
-  if(x[i] != ' ') 
-   ++i;
-  if(x[i] == ' '){
-   o= przeliczenie(x, z, i);
-   if (o>l)
-   l=o;
-   ++i;
-   z=i;
-  }
- }while(x[i] != '\0');
- if(x[i]=='\0'){
-   o= przeliczenie(x, z, i);
-   if (o>l)
-   l=o;
- }
- 
- printf("Najwieksza z podanych przez ciebie liczb to %d\n", l);
+    // Interakcja z uzytkownikiem
+    printf("Podaj liczby oddzielone od siebie spacja (ilosc wszystkich znakow nie moze przekraczac %d): ", max);
+    fgets(x, max, stdin);
 
- return 0;
+    // Ze tak powiem "program wlasciwy"
+    do {
+        if (x[i] != ' ')
+            ++i;
+        if (x[i] == ' ') {
+            o = przeliczenie(x, z, i);
+            if (o > l)
+                l = o;
+            ++i;
+            z = i;
+        }
+    } while (x[i] != '\0');
+    if (x[i] == '\0') {
+        o = przeliczenie(x, z, i);
+        if (o > l)
+            l = o;
+    }
+
+    printf("Najwieksza z podanych przez ciebie liczb to %d\n", l);
+
+    return 0;
 }
-int przeliczenie(char x[], int start, int koniec){
+int przeliczenie(char x[], int start, int koniec) {
+    char o[100];
+    int p, z;
 
- char o[100];
- int p, z;
+    for (p = start, z = 0; p <= koniec; ++p, ++z) {
+        o[z] = x[p];
+    }
+    o[z] = '\0';
+    z = atoi(o);
 
- for(p=start, z=0; p<=koniec; ++p, ++z)
-  o[z]=x[p];
- o[z]='\0';
- z=atoi(o);
-
- return z;
+    return z;
 }
